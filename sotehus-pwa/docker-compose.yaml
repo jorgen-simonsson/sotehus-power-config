@@ -1,0 +1,16 @@
+services:
+  sotehus-pwa:
+    image: ghcr.io/jorgen-simonsson/sotehus-pwa:latest
+    container_name: sotehus-pwa
+    pull_policy: always
+    ports:
+      - "8000:80"
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
